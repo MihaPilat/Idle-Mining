@@ -3,20 +3,22 @@ using UnityEngine;
 
 public class CurrencyService
 {
+    private readonly SaveLoadService _saveLoadService;
+
     public event Action<double> OnGoldChanged;
 
-    public double CurrentGold { get; private set; }
+    public double CurrentGold => _saveLoadService.Data.Gold;
 
-    public CurrencyService()
+    public CurrencyService(SaveLoadService saveLoadService)
     {
-        CurrentGold = 0;
+        _saveLoadService = saveLoadService;
     }
 
     public void AddGold(double amount)
     {
         if (amount <= 0) return;
 
-        CurrentGold += amount;
+        _saveLoadService.Data.Gold += amount;
 
         OnGoldChanged?.Invoke(CurrentGold);
     }
@@ -32,7 +34,7 @@ public class CurrencyService
 
         if(HasEnoughGold(amount))
         {
-            CurrentGold -= amount;
+            _saveLoadService.Data.Gold -= amount;
             OnGoldChanged?.Invoke(CurrentGold);
             return true;
         }

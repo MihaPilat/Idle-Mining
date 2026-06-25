@@ -6,8 +6,17 @@ public class GameplayInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
+        BindSaveLoadService();
         BindCurrencyService();
         BindPassiveIncomeService();
+    }
+
+    private void BindSaveLoadService()
+    {
+        Container
+            .Bind<SaveLoadService>()
+            .AsSingle()
+            .NonLazy();
     }
 
     private void BindPassiveIncomeService()
