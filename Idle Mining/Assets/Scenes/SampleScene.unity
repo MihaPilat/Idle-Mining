@@ -318,6 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c24187c371c4b0240a16fb47b1084982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MineController
+  _mineId: mine_01
   _upgradeButton: {fileID: 700655370}
   _infoText: {fileID: 1695975542}
   _buttonText: {fileID: 882149941}

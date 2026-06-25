@@ -18,18 +18,9 @@ public class PassiveIncomeService : IDisposable
         _currencyService = currencyService;
         _cts = new CancellationTokenSource();
 
-        // 
-        GoldPerSecond = 5;
+        GoldPerSecond = 0;
 
         StartIncomeLoop(_cts.Token).Forget();
-    }
-
-    public void AddIncomeSource(double amount)
-    {
-        if (amount <= 0) return;
-
-        GoldPerSecond += amount;
-        OnIncomeChanged?.Invoke(GoldPerSecond);
     }
 
     private async UniTaskVoid StartIncomeLoop(CancellationToken token)
@@ -43,6 +34,11 @@ public class PassiveIncomeService : IDisposable
                 _currencyService.AddGold(GoldPerSecond);
             }
         }
+    }
+    public void RecalculateTotalIncome(double totalIncome)
+    {
+        GoldPerSecond = totalIncome;
+        OnIncomeChanged?.Invoke(GoldPerSecond);
     }
 
     public void Dispose()
