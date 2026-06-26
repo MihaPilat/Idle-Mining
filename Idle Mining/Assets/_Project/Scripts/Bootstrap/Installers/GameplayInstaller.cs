@@ -4,6 +4,9 @@ using Zenject;
 
 public class GameplayInstaller : MonoInstaller
 {
+    [SerializeField] private FloatingText _floatingTextPrefab;
+    [SerializeField] private Transform _dynamicCanvasTransform;
+
     public override void InstallBindings()
     {
         BindPoolFactory();
@@ -11,6 +14,16 @@ public class GameplayInstaller : MonoInstaller
         BindCurrencyService();
         BindPassiveIncomeService();
         BindOfflineIncomeService();
+        BindFloatingTextService();
+    }
+
+    private void BindFloatingTextService()
+    {
+        Container
+            .Bind<FloatingTextService>()
+            .AsSingle()
+            .WithArguments(_floatingTextPrefab, _dynamicCanvasTransform)
+            .NonLazy();
     }
 
     private void BindPoolFactory()

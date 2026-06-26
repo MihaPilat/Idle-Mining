@@ -17,7 +17,8 @@ public class ObjectPool<T> where T : Component
 
         for (int i = 0; i < initialSize; i++)
         {
-            CreateNewObject();
+            T obj = CreateNewObject();
+            _objects.Push(obj);
         }
     }
 
@@ -37,14 +38,22 @@ public class ObjectPool<T> where T : Component
     public void Return(T obj)
     {
         obj.gameObject.SetActive(false);
-        _objects.Push(obj);
+
+        if (_container != null)
+        {
+            obj.transform.SetParent(_container, false);
+        }
+
+        if (!_objects.Contains(obj))
+        {
+            _objects.Push(obj);
+        }
     }
 
     private T CreateNewObject()
     {
         T obj = _instantiator.InstantiatePrefabForComponent<T>(_prefab, _container);
         obj.gameObject.SetActive(false);
-        _objects.Push(obj);
         return obj;
     }
 }

@@ -2,18 +2,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 using DG.Tweening;
-using System;
+using UnityEngine.InputSystem;
 
 public class GoldClicker : MonoBehaviour
 {
     [SerializeField] private Button _button;
 
     private CurrencyService _currencyService;
+    private FloatingTextService _floatingTextService;
 
     [Inject]
-    private void Constuct(CurrencyService currencyService)
+    private void Construct(CurrencyService currencyService, FloatingTextService floatingTextService)
     {
         _currencyService = currencyService;
+        _floatingTextService = floatingTextService;
     }
 
     private void Start()
@@ -23,7 +25,22 @@ public class GoldClicker : MonoBehaviour
 
     private void HandleClick()
     {
-        _currencyService.AddGold(1);
+        double clickPower = 1;
+        _currencyService.AddGold(clickPower);
+
+        Vector2 screenPos2D = Vector2.zero;
+
+        if (Mouse.current != null)
+        {
+            screenPos2D = Mouse.current.position.ReadValue();
+        }
+        else if (Touchscreen.current != null && Touchscreen.current.primaryTouch.isInProgress)
+        {
+            screenPos2D = Touchscreen.current.primaryTouch.position.ReadValue();
+        }
+
+        Vector3 clickPosition = screenPos2D;
+        _floatingTextService.ShowText($"+{clickPower}", clickPosition);
 
         transform.DOComplete();
 

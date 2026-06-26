@@ -1407,6 +1407,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a973c7474ca3054b9380afb02a43af1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameplayInstaller
+  _floatingTextPrefab: {fileID: 7443580007320105580, guid: dc661e0cac4e9c240b0b4cbb1094bd02, type: 3}
+  _dynamicCanvasTransform: {fileID: 96865756}
 --- !u!4 &1432639576
 Transform:
   m_ObjectHideFlags: 0
