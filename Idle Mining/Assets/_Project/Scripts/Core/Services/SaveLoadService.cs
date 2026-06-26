@@ -13,6 +13,8 @@ public class SaveLoadService
 
     public void Save()
     {
+        Data.LastPlayTime = System.DateTime.UtcNow.ToString();
+
         string json = JsonUtility.ToJson(Data, true);
 
         PlayerPrefs.SetString(SaveKey, json);

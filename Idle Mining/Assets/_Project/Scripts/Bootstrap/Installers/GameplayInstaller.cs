@@ -9,6 +9,15 @@ public class GameplayInstaller : MonoInstaller
         BindSaveLoadService();
         BindCurrencyService();
         BindPassiveIncomeService();
+        BindOfflineIncomeService();
+    }
+
+    private void BindOfflineIncomeService()
+    {
+        Container
+            .BindInterfacesAndSelfTo<OfflineIncomeService>()
+            .AsSingle()
+            .NonLazy();
     }
 
     private void BindSaveLoadService()
