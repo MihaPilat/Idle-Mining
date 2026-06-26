@@ -6,10 +6,19 @@ public class GameplayInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
+        BindPoolFactory();
         BindSaveLoadService();
         BindCurrencyService();
         BindPassiveIncomeService();
         BindOfflineIncomeService();
+    }
+
+    private void BindPoolFactory()
+    {
+        Container
+            .Bind<PoolFactory>()
+            .AsSingle()
+            .NonLazy();
     }
 
     private void BindOfflineIncomeService()
