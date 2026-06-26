@@ -5,9 +5,13 @@ using Cysharp.Threading.Tasks;
 
 public class OfflineIncomeService : IInitializable
 {
+    public event Action<TimeSpan, double> OnOfflineIncomeCalculated;
+
     private readonly CurrencyService _currencyService;
     private readonly PassiveIncomeService _passiveIncomeService;
     private readonly SaveLoadService _saveLoadService;
+
+    public double PendingOfflineGold { get; private set; }
 
     public OfflineIncomeService(
             CurrencyService currencyService,
@@ -42,12 +46,17 @@ public class OfflineIncomeService : IInitializable
 
             if (secondsOffline > 10 && incomePerSecond > 0)
             {
-                double earnedGold = secondsOffline * incomePerSecond;
+                PendingOfflineGold = secondsOffline * incomePerSecond;
 
-                _currencyService.AddGold(earnedGold);
-
-                Debug.Log($"Отсутствие: {timePassed.Hours}ч {timePassed.Minutes}м {timePassed.Seconds}с. Заработано: {earnedGold:N0} золота");
+                OnOfflineIncomeCalculated?.Invoke(timePassed, PendingOfflineGold);
             }
         }
+    }
+    public void ClaimGold()
+    {
+        if (PendingOfflineGold <= 0) return;
+
+        _currencyService.AddGold(PendingOfflineGold);
+        PendingOfflineGold = 0;
     }
 }
