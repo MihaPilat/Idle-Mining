@@ -15,6 +15,11 @@
 /[Uu]ser[Ss]ettings/
 *.log
 
+# Игнорируем тяжелые десктопные библиотеки Firebase (macOS/Windows), которые весят >100мб
+**/Firebase/Plugins/x86_64/*.bundle
+**/Firebase/Plugins/x86_64/*.dll
+**/Firebase/Plugins/x86_64/*.so
+
 # By default unity supports Blender asset imports, *.blend1 blender files do not need to be commited to version control.
 *.blend1
 *.blend1.meta
