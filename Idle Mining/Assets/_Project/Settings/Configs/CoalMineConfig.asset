@@ -16,3 +16,4 @@ MonoBehaviour:
   _baseCost: 50
   _baseIncome: 2
   _costMultiplier: 1.15
+  _id: mine_coal

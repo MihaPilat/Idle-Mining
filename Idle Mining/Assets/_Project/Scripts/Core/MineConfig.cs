@@ -9,7 +9,9 @@ namespace Project.Configs
         [SerializeField] private double _baseCost = 50;
         [SerializeField] private double _baseIncome = 2;
         [SerializeField] private float _costMultiplier = 1.15f;
+        [SerializeField] private string _id = "mine_id";
 
+        public string Id => _id;
         public string Name => _name;
         public double BaseCost => _baseCost;
         public double BaseIncome => _baseIncome;

@@ -8,7 +8,7 @@ public class PoolFactory
     private readonly Transform _poolRoot;
     private readonly IInstantiator _instantiator;
 
-    private int _initialPoolSize = 50;
+    private int _initialPoolSize = 20;
 
     [Inject]
     public PoolFactory(IInstantiator instantiator)

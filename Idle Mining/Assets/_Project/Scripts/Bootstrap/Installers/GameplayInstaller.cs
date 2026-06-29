@@ -1,9 +1,13 @@
+using Project.Configs;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 public class GameplayInstaller : MonoInstaller
 {
+    [SerializeField] private List<MineConfig> _allMines;
+
     [SerializeField] private FloatingText _floatingTextPrefab;
     [SerializeField] private Transform _dynamicCanvasTransform;
 
@@ -15,6 +19,16 @@ public class GameplayInstaller : MonoInstaller
         BindPassiveIncomeService();
         BindOfflineIncomeService();
         BindFloatingTextService();
+        BindMineService();
+    }
+
+    private void BindMineService()
+    {
+        Container
+            .BindInterfacesAndSelfTo<MineService>()
+            .AsSingle()
+            .WithArguments(_allMines)
+            .NonLazy();
     }
 
     private void BindFloatingTextService()
