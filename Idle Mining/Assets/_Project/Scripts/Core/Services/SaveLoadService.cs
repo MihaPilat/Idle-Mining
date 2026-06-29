@@ -23,6 +23,15 @@ public class SaveLoadService
         Debug.Log($"Игра сохранена.");
     }
 
+    public void LoadFromRawJson(string rawJson)
+    {
+        if (string.IsNullOrEmpty(rawJson)) return;
+
+        Data = JsonUtility.FromJson<GameSaveData>(rawJson);
+
+        Save();
+    }
+
     private void Load()
     {
         if (PlayerPrefs.HasKey(SaveKey))

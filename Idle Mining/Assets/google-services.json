@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "130270090965",
+    "firebase_url": "https://idle-mining-clicker-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "idle-mining-clicker",
+    "storage_bucket": "idle-mining-clicker.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130270090965:android:4e414fe4544474f5cbf45c",
+        "android_client_info": {
+          "package_name": "com.Ybi.IdleMiningClicker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD-aC1G7561ARH8ZfvUkwa-n5UECy7H4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

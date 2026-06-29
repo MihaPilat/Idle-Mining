@@ -8,14 +8,16 @@ public class MineService : IInitializable
     private readonly SaveLoadService _saveLoadService;
     private readonly PassiveIncomeService _passiveIncomeService;
     private readonly List<MineConfig> _allMineConfigs;
+    private readonly FirebaseService _firebaseService;
 
     private readonly Dictionary<string, int> _mineLevels = new Dictionary<string, int>();
 
-    public MineService(SaveLoadService saveLoadService, PassiveIncomeService passiveIncomeService, List<MineConfig> allConfigs)
+    public MineService(SaveLoadService saveLoadService, PassiveIncomeService passiveIncomeService, List<MineConfig> allConfigs, FirebaseService firebaseService)
     {
         _saveLoadService = saveLoadService;
         _passiveIncomeService = passiveIncomeService;
         _allMineConfigs = allConfigs;
+        _firebaseService = firebaseService;
     }
 
     public void Initialize()
@@ -53,6 +55,8 @@ public class MineService : IInitializable
         }
 
         UpdateGlobalPassiveIncome();
+
+        _firebaseService.SaveToCloud();
     }
 
     private void UpdateGlobalPassiveIncome()

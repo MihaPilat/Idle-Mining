@@ -10,12 +10,14 @@ public class GoldClicker : MonoBehaviour
 
     private CurrencyService _currencyService;
     private FloatingTextService _floatingTextService;
+    private FirebaseService _firebaseService;
 
     [Inject]
-    private void Construct(CurrencyService currencyService, FloatingTextService floatingTextService)
+    private void Construct(CurrencyService currencyService, FloatingTextService floatingTextService, FirebaseService firebaseService)
     {
         _currencyService = currencyService;
         _floatingTextService = floatingTextService;
+        _firebaseService = firebaseService;
     }
 
     private void Start()
@@ -45,5 +47,7 @@ public class GoldClicker : MonoBehaviour
         transform.DOComplete();
 
         transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.1f);
+
+        _firebaseService.SaveToCloud();
     }
 }

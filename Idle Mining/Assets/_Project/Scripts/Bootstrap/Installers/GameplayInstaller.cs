@@ -14,12 +14,22 @@ public class GameplayInstaller : MonoInstaller
     public override void InstallBindings()
     {
         BindPoolFactory();
+        BindFirebaseService();
         BindSaveLoadService();
         BindCurrencyService();
         BindPassiveIncomeService();
         BindOfflineIncomeService();
         BindFloatingTextService();
         BindMineService();
+
+    }
+
+    private void BindFirebaseService()
+    {
+        Container
+           .BindInterfacesAndSelfTo<FirebaseService>()
+           .AsSingle()
+           .NonLazy();
     }
 
     private void BindMineService()

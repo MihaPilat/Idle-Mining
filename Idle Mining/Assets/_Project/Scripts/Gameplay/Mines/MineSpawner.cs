@@ -30,4 +30,5 @@ public class MineSpawner : MonoBehaviour
             mineInstance.OnMineUpgraded += _mineService.HandleMineUpgrade;
         }
     }
+
 }
